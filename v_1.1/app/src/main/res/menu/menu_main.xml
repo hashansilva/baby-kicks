@@ -1,0 +1,28 @@
+<!--
+  ~ Copyright (c) Hashan Silva (hashan0314)
+  ~ All Rights Reserved
+  ~ All information contained herein is, and remains the property of the developer.
+  ~ Dissemination of this information or reproduction of this material is strictly forbidden unless prior written permission is obtained from the developer.
+  ~ Written by Hashan 2017.
+  -->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="hashan0314.babykicks.MainActivity">
+   <!-- <item
+        android:id="@+id/action_settings"
+        android:orderInCategory="200"
+        android:title="@string/action_settings"
+        app:showAsAction="never" />-->
+    <item
+        android:id="@+id/action_view_history"
+        android:orderInCategory="100"
+        android:title="@string/action_view_history"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/action_clear_history"
+        android:orderInCategory="200"
+        android:title="Clear Recent History"
+        app:showAsAction="never"/>
+</menu>
