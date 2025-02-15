@@ -1,18 +1,25 @@
 package com.hashan0314.babykicks
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.hashan0314.babykicks.ui.BabyMovementViewModel
+import com.hashan0314.babykicks.ui.BottomNavigationBar
+import com.hashan0314.babykicks.ui.MainScreen
+import com.hashan0314.babykicks.ui.MovementHistoryScreen
 import com.hashan0314.babykicks.ui.theme.BabyKicksTheme
 
 class MainActivity : ComponentActivity() {
@@ -21,31 +28,34 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             BabyKicksTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
+                val navController = rememberNavController()
+                var selectedScreen by remember { mutableStateOf("home") }
+
+                val viewModel: BabyMovementViewModel by viewModels()
+
+                Scaffold(
+                    bottomBar = {
+                        BottomNavigationBar(
+                            selectedScreen = selectedScreen,
+                            onItemSelected = { screen ->
+                                selectedScreen = screen
+                                navController.navigate(screen) {
+                                    launchSingleTop = true
+                                }
+                            }
+                        )
+                    }
+                ) { innerPadding ->
+                    NavHost(
+                        navController = navController,
+                        startDestination = "home",
                         modifier = Modifier.padding(innerPadding)
-                    )
+                    ) {
+                        composable("home") { MainScreen(viewModel) }
+                        composable("history") { MovementHistoryScreen(viewModel) }
+                    }
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Surface(color=Color.Cyan) {
-        Text(
-            text = "Hello $name!",
-            modifier = modifier
-        )
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    BabyKicksTheme {
-        Greeting("Android")
     }
 }
