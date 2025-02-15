@@ -39,8 +39,8 @@
 
 ### 1️⃣ Clone the Repository
 ```sh
-git clone https://github.com/your-repo/BabyKicks.git
-cd BabyKicks
+git clone git@github.com:hashansilva/baby-kicks.git
+cd baby-kicks
 ```
 
 ### 2️⃣ Open in Android Studio
@@ -63,12 +63,10 @@ The app follows **MVVM (Model-View-ViewModel)** architecture for better scalabil
 📂 **Project Structure**
 ```
 📦 com.hashan0314.babykicks  
+ ┣ 📂 ui/        # BabyKickViewModel, MainScreen, MovementHistoryScreen & other related ui components
  ┣ 📂 ui.theme/         # App Theme & Styling  
- ┣ 📂 database/         # Room Database & DAO  
- ┣ 📂 viewmodel/        # BabyKickViewModel  
- ┣ 📜 MainActivity.kt   # Main Application Entry  
- ┣ 📜 MainScreen.kt     # Home Screen (Kick Logger)  
- ┣ 📜 MovementHistoryScreen.kt  # View Movement Records  
+ ┣ 📂 data/         # Room Database & DAO  
+ ┣ 📜 MainActivity.kt   # Main Application Entry 
  ┗ 📜 README.md         # Documentation  
 ```
 
@@ -95,16 +93,17 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
-
-    // Jetpack Compose Navigation
-    implementation("androidx.navigation:navigation-compose:2.7.7")
-
-    // Room Database
     implementation("androidx.room:room-runtime:2.6.1")
+    implementation(libs.androidx.navigation.compose)
     ksp("androidx.room:room-compiler:2.6.1")
-
-    // Kotlin Coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+    implementation("androidx.room:room-ktx:2.6.1")
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
+    androidTestImplementation(platform(libs.androidx.compose.bom))
+    androidTestImplementation(libs.androidx.ui.test.junit4)
+    debugImplementation(libs.androidx.ui.tooling)
+    debugImplementation(libs.androidx.ui.test.manifest)
 }
 ```
 
@@ -127,8 +126,8 @@ This project is **open-source** under the **MIT License**.
 
 ## 📩 Contact & Support
 For any issues or feature requests, feel free to:  
-📧 Email: [your-email@example.com]  
-🐙 GitHub: [GitHub Repo Link]  
+📧 Email: [hashan.silva@gmail.com]  
+🐙 GitHub: [https://github.com/hashansilva/baby-kicks]
 
 ---
 
